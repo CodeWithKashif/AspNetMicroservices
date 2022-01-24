@@ -28,8 +28,8 @@ namespace Ordering.API.Controllers
         [ProducesResponseType(typeof(IEnumerable<OrdersVm>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<OrdersVm>>> GetOrdersByUserName(string userName)
         {
-            var query = new GetOrdersListQuery(userName);
-            var orders = await _mediator.Send(query);
+            GetOrdersListQuery query = new GetOrdersListQuery(userName);
+            List<OrdersVm> orders = await _mediator.Send(query);
             return Ok(orders);
         }
 
@@ -38,7 +38,7 @@ namespace Ordering.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<int>> CheckoutOrder([FromBody] CheckoutOrderCommand command)
         {
-            var result = await _mediator.Send(command);
+            int result = await _mediator.Send(command);
             return Ok(result);
         }
 

@@ -33,7 +33,11 @@ namespace Ordering.Application.Behaviours
                     throw new ValidationException(failures);
             }
 
-            return await next();
+            Console.WriteLine("\nPre Processor - validation passed.");
+            TResponse response =  await next();
+            Console.WriteLine("\nPost Processor - Actual work completed.");
+
+            return response;
         }
     }
 }
